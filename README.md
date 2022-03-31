@@ -2,8 +2,6 @@
 
 ## ENCM 509 Final Project
 
-![Workflow](https://github.com/aidanjoh/Facial-Detection-and-Recognition/actions/workflows/main.yml/badge.svg)
-
 ![GitHub](https://img.shields.io/github/license/aidanjoh/Facial-Detection-and-Recognition?style=plastic)
 
 ![Most recent commit](https://img.shields.io/github/last-commit/aidanjoh/Facial-Detection-and-Recognition)
