@@ -8,17 +8,12 @@ import matplotlib.pyplot as plt
 
 
 def main():
-    with open("Images/yaleB11_P00A+000E+20.pgm", 'rb') as pgmf:
+    with open("Images/YaleDB/yaleB11_P00A+000E+00.pgm", 'rb') as pgmf:
         im = plt.imread(pgmf)
         plt.imshow(im,cmap='gray', vmin=0, vmax=255)
         plt.show()
 
-    with open("Images/yaleB11_P00A+000E+45.pgm", 'rb') as pgmf:
-        im = plt.imread(pgmf)
-        plt.imshow(im, cmap='gray', vmin=0, vmax=255)
-        plt.show()
-
-    with open("Images/yaleB11_P00A+000E+90.pgm", 'rb') as pgmf:
+    with open("Images/YaleDB/yaleB11_P00A+000E+20.pgm", 'rb') as pgmf:
         im = plt.imread(pgmf)
         plt.imshow(im, cmap='gray', vmin=0, vmax=255)
         plt.show()
