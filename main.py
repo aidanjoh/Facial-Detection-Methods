@@ -26,6 +26,17 @@ def viewImage(im=None):
     plt.show()
     return
 
+def haarsFaceDetect(faceCascade, grayImage, minSize, scaleFactor=1.1, minNeighbors=5):
+    faces = faceCascade.detectMultiScale(
+                                            grayImage,
+                                            scaleFactor=scaleFactor,
+                                            minNeighbors=minNeighbors,
+                                            minSize=minSize,
+                                            flags=cv2.CASCADE_SCALE_IMAGE
+                                        )
+    return faces
+
+
 def main():
     cascPath = "haarcascade_frontalface_default.xml"
     faceCascade = cv2.CascadeClassifier(cascPath)
@@ -34,14 +45,16 @@ def main():
     grayImage = convertImageToGrayScale(imagePath)
     viewImage(grayImage)
 
-    #Get all the faces from the image
-    faces = faceCascade.detectMultiScale(
-                                            grayImage,
-                                            scaleFactor=1.1,
-                                            minNeighbors=5,
-                                            minSize=(30, 30),
-                                            flags=cv2.CASCADE_SCALE_IMAGE
-                                        )
+    # Get all the faces from the image
+    faces = haarsFaceDetect(faceCascade, grayImage, minSize=(30,30), scaleFactor=1.1, minNeighbors=5)
+   
+    # faces = faceCascade.detectMultiScale(
+    #                                         grayImage,
+    #                                         scaleFactor=1.1,
+    #                                         minNeighbors=5,
+    #                                         minSize=(30, 30),
+    #                                         flags=cv2.CASCADE_SCALE_IMAGE
+    #                                     )
 
     # Draw a rectangle around the faces
     for (x, y, w, h) in faces:
