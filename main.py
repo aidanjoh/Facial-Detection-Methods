@@ -6,17 +6,62 @@ import skimage
 import matplotlib.pyplot as plt
 
 
+def convertImageToGrayScale(imPath=None):
+    if imPath is None:
+        print("No image path was passed!")
+        return
+    
+    image = cv2.imread(imPath)
+    grayScaleImage = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    return grayScaleImage
+
+
+def viewImage(im=None):
+    if im is None:
+        print("No image was passed!")
+        return
+
+    #image = plt.imread(im)
+    plt.imshow(im,cmap='gray', vmin=0, vmax=255)
+    plt.show()
+    return
 
 def main():
-    with open("Images/YaleDB/yaleB11_P01A+000E+00.pgm", 'rb') as pgmf:
-        im = plt.imread(pgmf)
-        plt.imshow(im,cmap='gray', vmin=0, vmax=255)
-        plt.show()
+    cascPath = "haarcascade_frontalface_default.xml"
+    faceCascade = cv2.CascadeClassifier(cascPath)
 
-    with open("Images/YaleDB/yaleB11_P03A+000E+20.pgm", 'rb') as pgmf:
-        im = plt.imread(pgmf)
-        plt.imshow(im, cmap='gray', vmin=0, vmax=255)
-        plt.show()
+    imagePath = "Images/personal/10.jpg"
+    grayImage = convertImageToGrayScale(imagePath)
+    viewImage(grayImage)
+
+    #Get all the faces from the image
+    faces = faceCascade.detectMultiScale(
+                                            grayImage,
+                                            scaleFactor=1.1,
+                                            minNeighbors=5,
+                                            minSize=(30, 30),
+                                            flags=cv2.CASCADE_SCALE_IMAGE
+                                        )
+
+    # Draw a rectangle around the faces
+    for (x, y, w, h) in faces:
+        cv2.rectangle(grayImage, (x, y), (x+w, y+h), (0, 255, 0), 2)
+
+    # Display the resulting picture with the detected bounding box(es)
+    cv2.imshow('Face Detection', grayImage)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+    
+
+    # with open("Images/YaleDB/yaleB11_P01A+000E+00.pgm", 'rb') as pgmf:
+    #     im = plt.imread(pgmf)
+    #     plt.imshow(im,cmap='gray', vmin=0, vmax=255)
+    #     plt.show()
+
+    # with open("Images/YaleDB/yaleB11_P03A+000E+20.pgm", 'rb') as pgmf:
+    #     im = plt.imread(pgmf)
+    #     plt.imshow(im, cmap='gray', vmin=0, vmax=255)
+    #     plt.show()
 
     # cascPath = "haarcascade_frontalface_default.xml"
     # newCascPath = "lbpcascade_frontalface_improved.xml"
