@@ -51,7 +51,7 @@ def haarsFaceDetect(faceCascade, grayImage, minSize, scaleFactor=1.1, minNeighbo
 """
 Performs the LBP-based Haars cascade for frontal facial detection using OpenCV. Different parameters can be passed in to change the performance of the haars facial detection algorithm. Returns all the different faces detected. 
 """
-def lbpHaarsFaceDetect(grayImage, minSize, scaleFactor=1.1, minNeighbors=5):
+def lbpHaarsFaceDetectCV(grayImage, minSize, scaleFactor=1.1, minNeighbors=5):
     # Load LBP cascade classifier training
     lbpFaceCascade = cv2.CascadeClassifier('lbpcascade_frontalface_improved.xml')
     faces = lbpFaceCascade.detectMultiScale(
@@ -62,6 +62,24 @@ def lbpHaarsFaceDetect(grayImage, minSize, scaleFactor=1.1, minNeighbors=5):
                                             flags=cv2.CASCADE_SCALE_IMAGE
                                         )
     return faces
+
+"""
+Performs the LBP-based Haars cascade for frontal facial detection using Skimage. Different parameters can be passed in to change the performance of the haars facial detection algorithm. Returns all the different faces detected. 
+
+Output Dicts have form {'r': int, 'c': int, 'width': int, 'height': int}, where 'r' represents row position of top left corner of detected window, 'c' - col position, 'width' - width of detected window, 'height' - height of detected window.
+"""
+def lbpHaarsFaceDetectSki(grayImage, min_size, max_size, scale_factor=1.1, step_ratio=1.1 ):
+    # Load LBP cascade classifier training
+    lbpFaceCascade = skimage.feature.Cascade('lbpcascade_frontalface_improved.xml')
+    faces = lbpFaceCascade.detect_multi_scale(
+                                            grayImage,
+                                            scale_factor=scale_factor,
+                                            step_ratio=step_ratio,
+                                            min_size=min_size,
+                                            max_size=max_size,
+                                        )
+    return faces 
+
 
 """
 Calculates the interzection over union between the ground truth box of an image and the
@@ -109,6 +127,26 @@ def main():
 
     for image in groundTrueBoundingBox:
         print(image)
+
+    for imageNum in range(1,10):
+        imagePath = f"Images/personal/{imageNum}.jpg"
+        grayImage = convertImageToGrayScale(imagePath)
+        viewImage(grayImage)
+        faces = lbpHaarsFaceDetectSki(grayImage, min_size=(30,30), max_size=(1000,1000), scale_factor=1.1, step_ratio=1.4)
+        
+        # print(faces[0]['r'])
+        print(faces)
+        
+        # Draw a rectangle around the faces
+        for (face) in faces:
+            cv2.rectangle(grayImage, (face['r'], face['c']), (face['r']+face['width'], face['c']+face['width']), (0, 255, 0), 2)
+            predictedBox = [face['r'], face['c'], face['r']+face['width'], face['c']+face['height']]
+            print(predictedBox)
+
+        # Display the resulting picture with the detected bounding box(es)
+        cv2.imshow('Face Detection', grayImage)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
     
 
     for imageNum in range(1,10):
@@ -116,7 +154,7 @@ def main():
         grayImage = convertImageToGrayScale(imagePath)
         viewImage(grayImage)
         faces = haarsFaceDetect(faceCascade, grayImage, minSize=(30,30), scaleFactor=1.1, minNeighbors=5)
-
+        
         print(faces)
         # Draw a rectangle around the faces
         for (x, y, w, h) in faces:
