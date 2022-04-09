@@ -136,14 +136,12 @@ def main():
             groundTrueBoundingBox[imageNumber].append(intCoordinates)
             rowCount += 1
 
-    for image in groundTrueBoundingBox:
-        print(image)
 
     for imageNum in range(1,10):
         imagePath = f"Images/personal/{imageNum}.jpg"
         grayImage = convertImageToGrayScale(imagePath)
-        viewImage(grayImage)
-        faces = lbpHaarsFaceDetectSki(grayImage, min_size=(30,30), max_size=(1000,1000), scale_factor=1.1, step_ratio=1.4)
+        #viewImage(grayImage)
+        faces = lbpHaarsFaceDetectSki(grayImage, min_size=(30,30), max_size=(1000,1000), scale_factor=1.1, step_ratio=1)
         
         # print(faces[0]['r'])
         print(faces)
