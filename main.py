@@ -141,13 +141,7 @@ def main():
     for imageNum in range(1,10):
         imagePath = f"Images/personal/{imageNum}.jpg"
         grayImage = convertImageToGrayScale(imagePath)
-<<<<<<< HEAD
-        #viewImage(grayImage)
-        faces = lbpHaarsFaceDetectSki(grayImage, min_size=(30,30), max_size=(1000,1000), scale_factor=1.1, step_ratio=1)
-        
-=======
         faces = lbpHaarsFaceDetectSki(grayImage, min_size=(30,30), max_size=(1000,1000), scale_factor=1.1, step_ratio=1.4)
->>>>>>> f1a7863fc3778b332b564ab427249074e6b909b4
         # print(faces[0]['r'])
         print(faces)
         
