@@ -34,12 +34,27 @@ def viewImage(im=None):
     return
 
 """
-Performs the Haars cascade facial detection. Differnet parameters can be passed in to 
+Performs the Haars cascade facial detection. Different parameters can be passed in to 
 change the performance of the haars facial detection algorithm. Returns all the different
 faces detected.
 """
 def haarsFaceDetect(faceCascade, grayImage, minSize, scaleFactor=1.1, minNeighbors=5):
     faces = faceCascade.detectMultiScale(
+                                            grayImage,
+                                            scaleFactor=scaleFactor,
+                                            minNeighbors=minNeighbors,
+                                            minSize=minSize,
+                                            flags=cv2.CASCADE_SCALE_IMAGE
+                                        )
+    return faces
+
+"""
+Performs the LBP-based Haars cascade for frontal facial detection using OpenCV. Different parameters can be passed in to change the performance of the haars facial detection algorithm. Returns all the different faces detected. 
+"""
+def lbpHaarsFaceDetect(grayImage, minSize, scaleFactor=1.1, minNeighbors=5):
+    # Load LBP cascade classifier training
+    lbpFaceCascade = cv2.CascadeClassifier('lbpcascade_frontalface_improved.xml')
+    faces = lbpFaceCascade.detectMultiScale(
                                             grayImage,
                                             scaleFactor=scaleFactor,
                                             minNeighbors=minNeighbors,
