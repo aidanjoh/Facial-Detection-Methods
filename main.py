@@ -76,13 +76,25 @@ def main():
     cascPath = "haarcascade_frontalface_default.xml"
     faceCascade = cv2.CascadeClassifier(cascPath)
 
-    # groundTrueBoundingBox = []
+    groundTrueBoundingBox = [[] for i in range(10)]    #Change this to be based on the number of photos (a variable of length of photos)
+    print(groundTrueBoundingBox)
 
-    # with open("bounding_box_coords.csv") as csvFile:
-    #     groundTruthBoundingBoxes = csv.reader(csvFile, delimiter=',')
+    with open("updatedGroundTruthBBox.csv") as csvFile:
+        groundTruthBoundingBoxes = csv.reader(csvFile, delimiter=',')
 
-    #     for groundTruthBoundingBox in groundTruthBoundingBoxes[1:]:
-    #         groundTrueBoundingBox = groundTruthBoundingBox
+        rowCount = 0
+        for groundTruthBoundingBox in groundTruthBoundingBoxes:
+            if rowCount == 0:
+                rowCount += 1
+                continue
+
+            imageNumber = int(groundTruthBoundingBox[0])
+            groundTrueBoundingBox[imageNumber].append(groundTruthBoundingBox[1:])
+            rowCount += 1
+
+    for image in groundTrueBoundingBox:
+        print(image)
+    
 
     for imageNum in range(1,10):
         imagePath = f"Images/personal/{imageNum}.jpg"
@@ -95,10 +107,7 @@ def main():
         for (x, y, w, h) in faces:
             cv2.rectangle(grayImage, (x, y), (x+w, y+h), (0, 255, 0), 2)
             predictedBox = [x, y, x+w, y+h]
-            groundTruthBox = 
-
-
-    
+            print(predictedBox)
 
         # Display the resulting picture with the detected bounding box(es)
         cv2.imshow('Face Detection', grayImage)
