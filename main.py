@@ -84,7 +84,7 @@ def main():
     #     for groundTruthBoundingBox in groundTruthBoundingBoxes[1:]:
     #         groundTrueBoundingBox = groundTruthBoundingBox
 
-    for imageNum in range(1,11):
+    for imageNum in range(1,10):
         imagePath = f"Images/personal/{imageNum}.jpg"
         grayImage = convertImageToGrayScale(imagePath)
         viewImage(grayImage)
@@ -133,7 +133,7 @@ def main():
             print("Detection {}, score: {}, face_type:{}".format(d, scores[i], idx[i]))
 
 
-    imagePath = "Images/personal/10.jpg"
+    imagePath = "Images/personal/9.jpg"
     grayImage = convertImageToGrayScale(imagePath)
     viewImage(grayImage)
 
