@@ -2,10 +2,14 @@ import sys
 import cv2
 import dlib
 import skimage
+import csv
 
 import matplotlib.pyplot as plt
 
+"""
+Takes in an image path and coverts the image to grayscale.
 
+"""
 def convertImageToGrayScale(imPath=None):
     if imPath is None:
         print("No image path was passed!")
@@ -15,7 +19,10 @@ def convertImageToGrayScale(imPath=None):
     grayScaleImage = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     return grayScaleImage
 
+"""
+Plots an image in grayscale.
 
+"""
 def viewImage(im=None):
     if im is None:
         print("No image was passed!")
@@ -26,6 +33,11 @@ def viewImage(im=None):
     plt.show()
     return
 
+"""
+Performs the Haars cascade facial detection. Differnet parameters can be passed in to 
+change the performance of the haars facial detection algorithm. Returns all the different
+faces detected.
+"""
 def haarsFaceDetect(faceCascade, grayImage, minSize, scaleFactor=1.1, minNeighbors=5):
     faces = faceCascade.detectMultiScale(
                                             grayImage,
@@ -36,25 +48,62 @@ def haarsFaceDetect(faceCascade, grayImage, minSize, scaleFactor=1.1, minNeighbo
                                         )
     return faces
 
+"""
+Calculates the interzection over union between the ground truth box of an image and the
+predicted box for face detection.
+
+"""
+def calcIntersectiontionOverUnion(groundTruthBox, predictedBox):
+	# determine the (x, y)-coordinates of the intersection rectangle
+	xA = max(groundTruthBox[0], predictedBox[0])
+	yA = max(groundTruthBox[1], predictedBox[1])
+	xB = min(groundTruthBox[2], predictedBox[2])
+	yB = min(groundTruthBox[3], predictedBox[3])
+	# compute the area of intersection rectangle
+	interArea = max(0, xB - xA + 1) * max(0, yB - yA + 1)
+	# compute the area of both the prediction and ground-truth
+	# rectangles
+	groundTruthBoxArea = (groundTruthBox[2] - groundTruthBox[0] + 1) * (groundTruthBox[3] - groundTruthBox[1] + 1)
+	predictedBoxArea = (predictedBox[2] - predictedBox[0] + 1) * (predictedBox[3] - predictedBox[1] + 1)
+	# compute the intersection over union by taking the intersection
+	# area and dividing it by the sum of prediction + ground-truth
+	# areas - the interesection area
+	iou = interArea / float(groundTruthBoxArea + predictedBoxArea - interArea)
+	# return the intersection over union value
+	return iou
 
 def main():
     cascPath = "haarcascade_frontalface_default.xml"
     faceCascade = cv2.CascadeClassifier(cascPath)
 
-    # for imageNum in range(1,11):
-    #     imagePath = f"Images/personal/{imageNum}.jpg"
-    #     grayImage = convertImageToGrayScale(imagePath)
-    #     viewImage(grayImage)
-    #     faces = haarsFaceDetect(faceCascade, grayImage, minSize=(30,30), scaleFactor=1.1, minNeighbors=5)
+    # groundTrueBoundingBox = []
 
-    #     # Draw a rectangle around the faces
-    #     for (x, y, w, h) in faces:
-    #         cv2.rectangle(grayImage, (x, y), (x+w, y+h), (0, 255, 0), 2)
+    # with open("bounding_box_coords.csv") as csvFile:
+    #     groundTruthBoundingBoxes = csv.reader(csvFile, delimiter=',')
 
-    #     # Display the resulting picture with the detected bounding box(es)
-    #     cv2.imshow('Face Detection', grayImage)
-    #     cv2.waitKey(0)
-    #     cv2.destroyAllWindows()
+    #     for groundTruthBoundingBox in groundTruthBoundingBoxes[1:]:
+    #         groundTrueBoundingBox = groundTruthBoundingBox
+
+    for imageNum in range(1,11):
+        imagePath = f"Images/personal/{imageNum}.jpg"
+        grayImage = convertImageToGrayScale(imagePath)
+        viewImage(grayImage)
+        faces = haarsFaceDetect(faceCascade, grayImage, minSize=(30,30), scaleFactor=1.1, minNeighbors=5)
+
+        print(faces)
+        # Draw a rectangle around the faces
+        for (x, y, w, h) in faces:
+            cv2.rectangle(grayImage, (x, y), (x+w, y+h), (0, 255, 0), 2)
+            predictedBox = [x, y, x+w, y+h]
+            groundTruthBox = 
+
+
+    
+
+        # Display the resulting picture with the detected bounding box(es)
+        cv2.imshow('Face Detection', grayImage)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
 
     detector = dlib.get_frontal_face_detector()
     win = dlib.image_window()
