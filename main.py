@@ -6,6 +6,7 @@ import csv
 import numpy as np
 
 import matplotlib.pyplot as plt
+from matplotlib import patches
 
 """
 Takes in an image path and coverts the image to grayscale.
@@ -140,22 +141,34 @@ def main():
     for imageNum in range(1,10):
         imagePath = f"Images/personal/{imageNum}.jpg"
         grayImage = convertImageToGrayScale(imagePath)
+<<<<<<< HEAD
         #viewImage(grayImage)
         faces = lbpHaarsFaceDetectSki(grayImage, min_size=(30,30), max_size=(1000,1000), scale_factor=1.1, step_ratio=1)
         
+=======
+        faces = lbpHaarsFaceDetectSki(grayImage, min_size=(30,30), max_size=(1000,1000), scale_factor=1.1, step_ratio=1.4)
+>>>>>>> f1a7863fc3778b332b564ab427249074e6b909b4
         # print(faces[0]['r'])
         print(faces)
         
-        # Draw a rectangle around the faces
-        for (face) in faces:
-            cv2.rectangle(grayImage, (face['r'], face['c']), (face['r']+face['width'], face['c']+face['width']), (0, 255, 0), 2)
-            predictedBox = [face['r'], face['c'], face['r']+face['width'], face['c']+face['height']]
-            print(predictedBox)
+        plt.imshow(grayImage)
+        img_desc = plt.gca()
+        plt.set_cmap('gray')
 
-        # Display the resulting picture with the detected bounding box(es)
-        cv2.imshow('Face Detection', grayImage)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+        for patch in faces:
+
+            img_desc.add_patch(
+                patches.Rectangle(
+                    (patch['c'], patch['r']),
+                    patch['width'],
+                    patch['height'],
+                    fill=False,
+                    color='r',
+                    linewidth=2
+                )
+            )
+
+        plt.show()
     
 
     for imageNum in range(1,10):
