@@ -222,33 +222,15 @@ def main():
                 print(f"The IoU Score is: {iouScore}")
             else:
                 pass
-        
-        plt.imshow(img)
-        img_desc = plt.gca()
-        plt.set_cmap('gray')
-
-        for patch in faces:
-
-            img_desc.add_patch(
-                patches.Rectangle(
-                    (patch['c'], patch['r']),
-                    patch['width'],
-                    patch['height'],
-                    fill=False,
-                    color='r',
-                    linewidth=2
-                )
-            )
-
-        plt.show()
+    
 
         # Draw a rectangle around the faces
         win.clear_overlay()
         win.set_image(img)
         print(detectedFaces)
         win.add_overlay(detectedFaces)
-        win.add_overlay([groundTrueBoundingBox[imageNum][0][0], groundTrueBoundingBox[imageNum][0][1],
-                        groundTrueBoundingBox[imageNum][0][2], groundTrueBoundingBox[imageNum][0][3]])
+        faceBoxRectangle = dlib.rectangle(left=groundTrueBoundingBox[imageNum][0][0], top=groundTrueBoundingBox[imageNum][0][1], right=groundTrueBoundingBox[imageNum][0][2], bottom=groundTrueBoundingBox[imageNum][0][3])
+        win.add_overlay(faceBoxRectangle)
         dlib.hit_enter_to_continue()
 
         # Finally, if you really want to you can ask the detector to tell you the score
@@ -261,11 +243,6 @@ def main():
         dets, scores, idx = detector.run(img, 1, -1)
         for i, d in enumerate(dets):
             print("Detection {}, score: {}, face_type:{}".format(d, scores[i], idx[i]))
-
-        for (x, y, w, h) in faces:
-            cv2.rectangle(grayImage, (x, y), (x+w, y+h), (0, 255, 0), 5)
-
-
 
 if __name__ == "__main__":
     main()
