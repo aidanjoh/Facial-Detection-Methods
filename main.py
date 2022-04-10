@@ -137,8 +137,6 @@ def main():
             groundTrueBoundingBox[imageNumber].append(intCoordinates)
             rowCount += 1
 
-    for image in groundTrueBoundingBox:
-        print(image)
 
     for imageNum in range(1,10):
         imagePath = f"Images/personal/{imageNum}.jpg"
