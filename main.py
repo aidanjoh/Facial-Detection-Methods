@@ -115,6 +115,22 @@ def calcIntersectiontionOverUnion(groundTruthBox, predictedBox):
     # return the intersection over union value
     return iou
 
+"""
+Based off of a specified threshold value this function calculates the total number of 
+true positives and false negatives which can be used to create a confusion matrix.
+"""
+def calcTPandFN(thresholdValue, iouScores):
+    numOfTP = 0
+    numOfFN = 0
+    for iouScore in iouScores:
+        if iouScore >= thresholdValue:
+            numOfTP += 1
+        else:
+            numOfFN += 1
+    
+    return numOfTP, numOfFN
+
+
 def main():
     cascPath = "haarcascade_frontalface_default.xml"
     faceCascade = cv2.CascadeClassifier(cascPath)
@@ -189,6 +205,7 @@ def main():
         for (x, y, w, h) in faces:
             cv2.rectangle(grayImage, (x, y), (x+w, y+h), (0, 255, 0), 5)
             predictedBox = [x, y, x+w, y+h]
+            iouScores = []
             if len(groundTrueBoundingBox[imageNum]) == 1:
                 print(groundTrueBoundingBox[imageNum][0])
                 cv2.rectangle(grayImage, (groundTrueBoundingBox[imageNum][0][0], groundTrueBoundingBox[imageNum][0][1]), \
