@@ -144,13 +144,26 @@ def main():
         faces = lbpHaarsFaceDetectSki(grayImage, min_size=(30,30), max_size=(1000,1000), scale_factor=1.1, step_ratio=1.4)
         # print(faces[0]['r'])
         print(faces)
-        
+         
         plt.imshow(grayImage)
         img_desc = plt.gca()
         plt.set_cmap('gray')
+        
+       
 
         for patch in faces:
 
+            if len(groundTrueBoundingBox[imageNum]) == 1:
+                predictedBox = [patch['c'], patch['r'], patch['c']+ patch['width'], patch['r']+ patch['height']]
+                print(groundTrueBoundingBox[imageNum][0])
+                cv2.rectangle(grayImage, (groundTrueBoundingBox[imageNum][0][0], groundTrueBoundingBox[imageNum][0][1]), \
+                                        (groundTrueBoundingBox[imageNum][0][2], groundTrueBoundingBox[imageNum][0][3]), (0, 0, 255), 5)
+                iouScore = calcIntersectiontionOverUnion(np.array(groundTrueBoundingBox[imageNum][0]), predictedBox)
+                print(f"The IoU Score is: {iouScore}")
+            else:
+                pass
+            # plotting boundaries on image
+            
             img_desc.add_patch(
                 patches.Rectangle(
                     (patch['c'], patch['r']),
