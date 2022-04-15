@@ -22,18 +22,18 @@ This is the....
 ### Cloning the Github Repo
 
 First clone the Github Repository to where you would like to store and run the code from. If you just download the juypter notebook make sure that the directory contains:
-    - A folder called Images which includes all the testing images we used for our project
-    - The two XML files for the classifiers, "Haarcascade_frontalface_default.xml" and "lbpcascade_frontalface_improved.xml"
-    - A csv file storing the ground truth bounding boxes called "updatedGroundTruthBBox.csv"
-    - A yaml file called finalProject.yml that can be used to recreated the anaconda environment that we were using
+- A folder called Images which includes all the testing images we used for our project
+- The two XML files for the classifiers, "Haarcascade_frontalface_default.xml" and "lbpcascade_frontalface_improved.xml"
+- A csv file storing the ground truth bounding boxes called "updatedGroundTruthBBox.csv"
+- A yaml file called finalProject.yml that can be used to recreated the anaconda environment that we were using
 
 ### Setting up the Conda Environment
 To set up the anaconda environment that we used for our project please follow these steps:
-    1. First download and install Anaconda.
-    2. Second create an anaconda environment from the provided environment yaml file either through the Anaconda navigator GUI or through the command line running the command '''conda env create --file finalProject.yml'''
+1. First download and install Anaconda.
+2. Second create an anaconda environment from the provided environment yaml file either through the Anaconda navigator GUI or through the command line running the command: `conda env create --file finalProject.yml`
 
 ### Running the Code
-To run the code open up the juypter notebook and select the finalProject environment and press run. 
+To run the code open up the juypter notebook called FacialDetection-AidanJohnson&CameronFaith, select the anaconda environment that was just created and select run all. 
 
 ## Results
 ### Haar Cascade Precision vs Recall Plot
