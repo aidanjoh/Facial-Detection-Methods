@@ -1,4 +1,4 @@
-# Facial-Detection-and-Recognition
+# Facial-Detection-Methods
 
 ## ENCM 509 Final Project
 
