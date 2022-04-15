@@ -38,16 +38,16 @@ To run the code open up the juypter notebook called FacialDetection-AidanJohnson
 ## Results
 ### Haar Cascade Precision vs Recall Plot
 
-![Screenshot of the Charts](docs/charts.png?raw=true "Screenshot of the Charts")
+![Haar Cascade Precision vs Recall](docs/HaarCascadePrecisionVsRecall.png?raw=true "Haar Cascade Precision vs Recall")
 
 ### LBP Precision vs Recall Plot
 
-![Screenshot of the Negative Test](docs/true_negative.png?raw=true "Screenshot")
+![LBP Precision vs Recall Plot](docs/LBPPrecisionVsRecall.png?raw=true "LBP Precision vs Recall Plot")
 
 ### HOG + SVM Precision vs Recall Plot
 
-![Screenshot of the Positive Test](docs/true_positive.png?raw=true "Screenshot")
+![HOG + SVM Precision vs Recall Plot](docs/HOGPrecisionVsRecall.png?raw=true "HOG + SVM Precision vs Recall Plot")
 
 ### Precsion vs Recall Plot of All 3 Methods
 
-![Screenshot of LBP Test](docs/lbp.png?raw=true "Screenshot")
+![Precsion vs Recall Plot of All 3 Methods](docs/All3.png?raw=true "Precsion vs Recall Plot of All 3 Methods")
