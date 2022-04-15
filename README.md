@@ -11,7 +11,7 @@
 
 ## Description
 
-This is the....
+The purpose of this project is to explore three different methods of facial detection and evaluate their performance. In this analysis, we will be using eight of our own personal images to compare different facial detection approaches. Each image will contain different elements that will challenge the three techniques and provide insight into the strengths and weaknesses of each face detection method. 
 
 ## Table of Contents
 
