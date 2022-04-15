@@ -4,7 +4,7 @@
 ### Aidan Johnson
 ### Cameron Faith
 
-![GitHub](https://img.shields.io/github/license/aidanjoh/Facial-Detection-Methods?style=plastic)
+![GitHub](https://img.shields.io/github/license/aidanjoh/Facial-Detection-Methods)
 
 ![Most recent commit](https://img.shields.io/github/last-commit/aidanjoh/Facial-Detection-Methods)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/aidanjoh/Facial-Detection-Methods)
