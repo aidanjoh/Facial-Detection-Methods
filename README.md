@@ -1,6 +1,8 @@
 # Facial-Detection-Methods
 
 ## ENCM 509 Final Project
+### Aidan Johnson
+### Cameron Faith
 
 ![GitHub](https://img.shields.io/github/license/aidanjoh/Facial-Detection-Methods?style=plastic)
 
@@ -14,30 +16,38 @@ This is the....
 ## Table of Contents
 
 - [Installation](#Installation)
-- [Usage](#Usage)
-- [Documentation](#Documentation)
-- [Questions](#Questions)
+- [Results](#Results)
 
 ## Installation
+### Cloning the Github Repo
 
-### Setting up conda environment
+First clone the Github Repository to where you would like to store and run the code from. If you just download the juypter notebook make sure that the directory contains:
+    - A folder called Images which includes all the testing images we used for our project
+    - The two XML files for the classifiers, "Haarcascade_frontalface_default.xml" and "lbpcascade_frontalface_improved.xml"
+    - A csv file storing the ground truth bounding boxes called "updatedGroundTruthBBox.csv"
+    - A yaml file called finalProject.yml that can be used to recreated the anaconda environment that we were using
 
-## Documentation
+### Setting up the Conda Environment
+To set up the anaconda environment that we used for our project please follow these steps:
+    1. First download and install Anaconda.
+    2. Second create an anaconda environment from the provided environment yaml file either through the Anaconda navigator GUI or through the command line running the command '''conda env create --file finalProject.yml'''
 
-### Demonstration
+### Running the Code
+To run the code open up the juypter notebook and select the finalProject environment and press run. 
 
-#### Charts
+## Results
+### Haar Cascade Precision vs Recall Plot
 
 ![Screenshot of the Charts](docs/charts.png?raw=true "Screenshot of the Charts")
 
-#### True Negative
+### LBP Precision vs Recall Plot
 
 ![Screenshot of the Negative Test](docs/true_negative.png?raw=true "Screenshot")
 
-#### True Positive
+### HOG + SVM Precision vs Recall Plot
 
 ![Screenshot of the Positive Test](docs/true_positive.png?raw=true "Screenshot")
 
-#### LBP Test
+### Precsion vs Recall Plot of All 3 Methods
 
 ![Screenshot of LBP Test](docs/lbp.png?raw=true "Screenshot")
