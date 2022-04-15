@@ -21,7 +21,7 @@ This is the....
 ## Installation
 ### Cloning the Github Repo
 
-First clone the Github Repository to where you would like to store and run the code from. If you just download the juypter notebook make sure that the directory contains:
+First clone the Github Repository to where you would like to store and run the code from. If you choose to only download the juypter notebook instead of the repository make sure that the directory contains:
 - A folder called Images which includes all the testing images we used for our project
 - The two XML files for the classifiers, "Haarcascade_frontalface_default.xml" and "lbpcascade_frontalface_improved.xml"
 - A csv file storing the ground truth bounding boxes called "updatedGroundTruthBBox.csv"
