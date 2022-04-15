@@ -2,10 +2,10 @@
 
 ## ENCM 509 Final Project
 
-![GitHub](https://img.shields.io/github/license/aidanjoh/Facial-Detection-and-Recognition?style=plastic)
+![GitHub](https://img.shields.io/github/license/aidanjoh/Facial-Detection-Methods?style=plastic)
 
-![Most recent commit](https://img.shields.io/github/last-commit/aidanjoh/Facial-Detection-and-Recognition)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/aidanjoh/Facial-Detection-and-Recognition)
+![Most recent commit](https://img.shields.io/github/last-commit/aidanjoh/Facial-Detection-Methods)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/aidanjoh/Facial-Detection-Methods)
 
 ## Description
 
